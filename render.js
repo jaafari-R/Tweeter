@@ -28,6 +28,7 @@ const Renderer = function() {
             postHTML.append(commentsHTML);
             postHTML.append(newCommentHTML);
             postHTML.append(deletePostHTML);
+            
             $("#posts").append($(postHTML));
         }
     }
