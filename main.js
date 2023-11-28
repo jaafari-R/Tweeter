@@ -1,20 +1,54 @@
 tweeter = Tweeter();
 renderer = Renderer();
 
-const initTweeterData = () => {
-    tweeter.addPost("First post!");
-    tweeter.addPost("Aw man, I wanted to be first");
-    
-    tweeter.addComment("First comment on first post!", "p1")
-    tweeter.addComment("Second comment on first post!!", "p1")
-    tweeter.addComment("Third comment on first post!!!", "p1")
-    
-    tweeter.addComment("Don't wory second poster, you'll be first one day.", "p2")
-    tweeter.addComment("Yeah, believe in yourself!", "p2")
-    tweeter.addComment("Haha second place what a joke.", "p2")
+// Create a new post
+function post() {
+    const postText = $("#input").val();
+    if(!postText) {
+        return;
+    }
+    tweeter.addPost($("#input").val());
+    $("#input").val("");
+    renderPosts();
 }
 
+const createDynamicListeners = () => {
+    // Delete a post
+    $(".delete").click(function() {
+        if(!confirm("Are you sure you want to delete the post?")) {
+            return;
+        }
+        const postId = $(this).closest(".post").data("id");
+        tweeter.removePost(postId);
+        renderPosts();
+    });
 
-initTweeterData();
-// render posts
-renderer.renderPosts(tweeter.getPosts());
+    // add a comment
+    $(".add-comment").click(function() {
+        const postId = $(this).closest(".post").data("id");
+        const commentText = $(this).closest("div").find("input").val();
+        if(!commentText) {
+            return;
+        }
+        tweeter.addComment(commentText, postId);
+        renderPosts();
+    });
+    
+    // Delete a comment
+    $(".delete-comment").click(function() {
+        if(!confirm("Are you sure you want to delete the comment?")) {
+            return;
+        }
+        const postId = $(this).closest(".post").data("id");
+        const commentId = $(this).closest("p").data("id");
+        tweeter.removeComment(postId, commentId);
+        renderPosts();
+    });
+}
+
+function renderPosts() {
+    renderer.renderPosts(tweeter.getPosts());
+    createDynamicListeners();
+}
+
+renderPosts()

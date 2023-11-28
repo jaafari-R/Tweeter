@@ -36,6 +36,7 @@ const Tweeter = function() {
         const postIndex = getItemIndexById(_posts, postId);
         const commentId = ++commentIdCounter;
         const newComment = Comment(commentId, text);
+        console.log(postIndex, postId)
 
         _posts[postIndex].comments.push(newComment);
     }

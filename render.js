@@ -16,11 +16,11 @@ const Renderer = function() {
             const newCommentHTML = $(`
                 <div>
                     <input placeholder="Got something to say?">
-                    <button>Comment</button>
+                    <button class="add-comment">Comment</button>
                 <div>
             `);
             
-            deletePostHTML = $(`<div class="delete">Delete Post</div>`)
+            const deletePostHTML = $(`<div class="delete">Delete Post</div>`)
             
             /* post div */
             const postHTML = $(`<div class="post" data-id="${post.id}"></div>`);
