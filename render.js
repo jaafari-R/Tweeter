@@ -8,7 +8,7 @@ const Renderer = function() {
             /* comments div */
             const commentsHTML = $(`<div class="comments"></div>`);
             for(let comment of post.comments) {
-                commentHTML = $(`<p data-id=${comment.id}><span class="delete-comment">x </span>${comment.text}</p>`);
+                const commentHTML = $(`<p data-id=${comment.id}><i class="delete-comment fa-solid fa-trash-can"></i> ${comment.text}</p>`);
                 commentsHTML.append(commentHTML);
             }
 
