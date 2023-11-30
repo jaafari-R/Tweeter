@@ -24,8 +24,6 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
     let commentIdCounter;
     
     initIdCounters();
-    console.log(postIdCounter);
-    console.log(commentIdCounter);
 
     const getPosts = () => {
         return _posts;
@@ -45,7 +43,6 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
         const postIndex = getItemIndexById(_posts, postId);
         const commentId = ++commentIdCounter;
         const newComment = Comment(commentId, text);
-        console.log(postIndex, postId)
 
         _posts[postIndex].comments.push(newComment);
     };
