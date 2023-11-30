@@ -33,43 +33,40 @@ function post() {
     renderPosts();
 }
 
-const createDynamicListeners = () => {
-    // Delete a post
-    $(".delete").click(function() {
-        if(!confirm("Are you sure you want to delete the post?")) {
-            return;
-        }
-        const postId = $(this).closest(".post").data("id");
-        tweeter.removePost(postId);
-        renderPosts();
-    });
+// Delete a post
+$("#posts").on("click", ".delete", function() {
+    if(!confirm("Are you sure you want to delete the post?")) {
+        return;
+    }
+    const postId = $(this).closest(".post").data("id");
+    tweeter.removePost(postId);
+    renderPosts();
+});
 
-    // add a comment
-    $(".add-comment").click(function() {
-        const postId = $(this).closest(".post").data("id");
-        const commentText = $(this).closest("div").find("input").val();
-        if(!commentText) {
-            return;
-        }
-        tweeter.addComment(commentText, postId);
-        renderPosts();
-    });
-    
-    // Delete a comment
-    $(".delete-comment").click(function() {
-        if(!confirm("Are you sure you want to delete the comment?")) {
-            return;
-        }
-        const postId = $(this).closest(".post").data("id");
-        const commentId = $(this).closest("p").data("id");
-        tweeter.removeComment(postId, commentId);
-        renderPosts();
-    });
-}
+// add a comment
+$("#posts").on("click", ".add-comment", function() {
+    const postId = $(this).closest(".post").data("id");
+    const commentText = $(this).closest("div").find("input").val();
+    if(!commentText) {
+        return;
+    }
+    tweeter.addComment(commentText, postId);
+    renderPosts();
+});
+
+// Delete a comment
+$("#posts").on("click", ".delete-comment", function() {
+    if(!confirm("Are you sure you want to delete the comment?")) {
+        return;
+    }
+    const postId = $(this).closest(".post").data("id");
+    const commentId = $(this).closest("p").data("id");
+    tweeter.removeComment(postId, commentId);
+    renderPosts();
+});
 
 function renderPosts() {
     renderer.renderPosts(tweeter.getPosts());
-    createDynamicListeners();
 }
 
 renderPosts()
