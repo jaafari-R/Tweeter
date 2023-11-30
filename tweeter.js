@@ -68,7 +68,7 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
         if(_posts && postIdCounter == INIT_POST_ID_COUNTER) {
             calcPostIdCounter();
         }
-        if(_posts && commentIdCounter == INIT_POST_ID_COUNTER) {
+        if(_posts && commentIdCounter == INIT_COMMENT_ID_COUNTER) {
             calcCommentIdCounter();
         }
     };
