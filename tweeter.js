@@ -3,22 +3,23 @@ const POST_ID_PREFIX = 'p';
 const INIT_POST_ID_COUNTER = 0;
 const INIT_COMMENT_ID_COUNTER = 0;
 
-const Comment = function(id, text) {
-    return {
-        id: COMMENT_ID_PREFIX + id,
-        text
-    }
-}
-
-const Post = function(id, text) {
-    return {
-        id: POST_ID_PREFIX + id,
-        text,
-        comments: []
-    }
-}
-
 const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
+
+    const createComment = function(id, text) {
+        return {
+            id: COMMENT_ID_PREFIX + id,
+            text
+        }
+    }
+    
+    const createPost = function(id, text) {
+        return {
+            id: POST_ID_PREFIX + id,
+            text,
+            comments: []
+        }
+    }
+
     const _posts = JSON.parse(JSON.stringify(posts)) || [];
     let postIdCounter;
     let commentIdCounter;
@@ -31,7 +32,7 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
 
     const addPost = (text) => {
         const postId = ++postIdCounter;
-        _posts.push(Post(postId, text));
+        _posts.push(createPost(postId, text));
     };
 
     const removePost = (id) => {
@@ -42,7 +43,7 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
     const addComment = (text, postId) => {
         const postIndex = getItemIndexById(_posts, postId);
         const commentId = ++commentIdCounter;
-        const newComment = Comment(commentId, text);
+        const newComment = createComment(commentId, text);
 
         _posts[postIndex].comments.push(newComment);
     };
@@ -73,6 +74,8 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
         }
     };
 
+    // p1 p4 p5
+
     function calcPostIdCounter() {
         _posts.forEach((post) => {
             postIdCounter = Math.max(postIdCounter, post.id.replace(POST_ID_PREFIX, ""));
@@ -87,7 +90,6 @@ const Tweeter = function(posts, initPostIdCounter, initCommentIdCounter) {
         });
     };
     
-
 
     return {
         getPosts,

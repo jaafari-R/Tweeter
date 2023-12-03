@@ -69,4 +69,4 @@ function renderPosts() {
     renderer.renderPosts(tweeter.getPosts());
 }
 
-renderPosts()
+renderPosts();
