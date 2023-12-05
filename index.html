@@ -14,7 +14,25 @@
         <div id="post" onclick="post()">Twit</div>
         <div id="posts"></div>
     </div>
+
+    <script id="post-template" type="text/x-handlebars-template">
+      {{#each posts}}
+        <div class="post" data-id={{id}}>
+          <h3 class="post-text">{{text}}</h3>
+          {{#each comments}}
+            <p data-id={{id}}><i class="delete-comment fa-solid fa-trash-can"></i> {{text}}</p>
+          {{/each}}
+          <div>
+            <input placeholder="Got something to say?">
+            <button class="add-comment">Comment</button>
+          </div>
+          <div class="delete">Delete Post</div>
+        </div>
+      {{/each}}
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
     <script src="render.js"></script> <!-- You'll create this soon -->
     <script src="tweeter.js"></script> <!-- You've got this -->
     <script src="main.js"></script> <!-- You'll create this soon -->
